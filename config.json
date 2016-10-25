@@ -1,0 +1,40 @@
+{
+  "mongo": { "url": "mongodb://localhost:27017/test", "collection": "tasks" },
+
+  "cols": [ { "_id": 0, "type": "col", "title": "Todo"         },
+            { "_id": 1, "type": "col", "title": "In progress"  },
+            { "_id": 2, "type": "col", "title": "AQ"           },
+            { "_id": 3, "type": "col", "title": "Done"         }
+          ],
+
+  "g_context": {  "task": {  "left": 10, "top": 0,
+                              "width": 220, "height": 150,
+                              "hiddenHeight": 50, "headHeight": 30,
+                              "col": 0, "position": 0,
+                              "colors": { "color1": "hsl(0, 0%, 96%)", "color2": "hsl(0, 0%, 98%)", "color3": "hsl(0, 0%, 0%)" },
+                              "visible": true,
+                              "active": true
+                            },
+
+                  "task_palette": [ { "color1": "hsl(0, 0%, 96%)",      "color2": "hsl(0, 0%, 98%)",      "color3": "hsl(0, 0%, 0%)"  },
+                                    { "color1": "hsl(0, 0%, 60%)",      "color2": "hsl(0, 0%, 80%)",      "color3": "hsl(0, 0%, 0%)"  },
+                                    { "color1": "hsl(114, 100%, 60%)",  "color2": "hsl(114, 100%, 80%)",  "color3": "hsl(0, 0%, 0%)"  },
+                                    { "color1": "hsl(237, 100%, 60%)",  "color2": "hsl(237, 100%, 80%)",  "color3": "hsl(0, 0%, 96%)" },
+                                    { "color1": "hsl(0, 100%, 60%)",    "color2": "hsl(0, 100%, 80%)",    "color3": "hsl(0, 0%, 0%)"  },
+                                    { "color1": "hsl(61, 100%, 60%)",   "color2": "hsl(61, 100%, 80%)",   "color3": "hsl(0, 0%, 0%)"  }
+                                  ]
+                },
+
+  "behavior": "Not yet implemented !",
+  "behavior": { "TRASH_EDITABLE": true,
+                "MAX_CLIENTS": 0,
+                "AUTHENTICATION": false,
+                "MULTI_USERS": false,
+                "USER_TYPES": "CREATE, DELETE, EDIT, READ",
+                "USER_TYPES": [ { "name": "admin",   "rights": [1, 1, 1, 1 ] },
+                                { "name": "writer",  "rights": [1, 1, 1, 1 ] },
+                                { "name": "reader",  "rights": [0, 0, 0, 1 ] },
+                                { "name": "default", "rights": [0, 0, 0, 0 ] }
+                              ]
+              }
+}

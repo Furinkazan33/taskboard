@@ -1,0 +1,12 @@
+{
+  "name": "taskboard",
+  "version": "2.0.1",
+  "private": false,
+  "dependencies": {
+    "my-mongo": "latest"
+  },
+  "main": "index.js",
+  "author": "Mathieu Vidalies",
+  "license": "ISC",
+  "description": "taskboard is a simple backend agile taskboard using mongoDB. Server-side customizable."
+}
