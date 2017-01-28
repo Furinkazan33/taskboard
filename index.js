@@ -38,7 +38,7 @@ var taskboard = function(config) {
   }
 
   this.getTasks = function(callback) {
-      mongo.find( { "type": "task" }, function (err, results) {
+      mongo.find( { "type": "task" }, {}, function (err, results) {
         var tasks = results.sort(compColPos);
         log(tasks);
 

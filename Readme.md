@@ -32,6 +32,7 @@ In your app.js (here i use socket.io) :
     io.sockets.on('connection', function (socket) {
       socket.on('socket_nav', function (tab) {
         socket.broadcast.emit('socket_nav', tab);
+        socket.emit('socket_nav', tab);
       });
       socket.on('socket_update', function (json) {
         taskBoard.updateCols(json.tasks, function() {});
