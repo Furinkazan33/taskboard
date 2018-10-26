@@ -1,11 +1,11 @@
-var taskboard = function(config) {
+var taskboard = config => {
 
   /* Load default configuration file */
   if(!config) { var config = require ('./config.json'); }
 
-  var mongo = require ('my-mongo');
-  var mongo = new mongo (config.mongo.url, config.mongo.collection);
-  var ObjectID = require ('mongodb').ObjectID;
+  const mongo = require ('my-mongo'),
+      mongo = new mongo (config.mongo.url, config.mongo.collection),
+      ObjectID = require ('mongodb').ObjectID;
 
   this.debug = false;
   this.g_context = config.g_context;
@@ -25,20 +25,15 @@ var taskboard = function(config) {
   }
 
   /* Compare cols and positions in col */
-  function compColPos (a, b) {
-    if (a.g_context.col > b.g_context.col) {
-      return 1;
-    }
-    if (a.g_context.col == b.g_context.col) {
-        return (a.g_context.position > b.g_context.position) ? 1 : -1;
-    }
-    if (a.g_context.col < b.g_context.col) {
-        return -1;
-    }
+  let compColPos = (a, b) => {
+    return a.g_context.col > b.g_context.col ? 
+      1 : a.g_context.col == b.g_context.col ?
+      (a.g_context.position > b.g_context.position ? 1 : -1) : 
+      -1
   }
 
-  this.getTasks = function(callback) {
-      mongo.find( { "type": "task" }, {}, function (err, results) {
+  this.getTasks = callback => {
+      mongo.find( { "type": "task" }, {}, (err, results) => {
         var tasks = results.sort(compColPos);
         log(tasks);
 
@@ -47,24 +42,24 @@ var taskboard = function(config) {
   }
 
   /* Update tasks positions */
-  this.updateCols = function(tasks, callback) {
-    for ( var i = 0; i < tasks.length; i++ ) {
-      var taskId = tasks[i].id;
-
-      mongo.update( { "type": "task", "_id": new ObjectID(taskId) }, { "g_context.position": tasks[i].position }, function(err, results) {
+  this.updateCols = (tasks, callback) => {
+    tasks.forEach((task, index) => {
+      let taskId = task.id
+      mongo.update( { "type": "task", "_id": new ObjectID(taskId) }, { "g_context.position": task.position }, (err, results) => {
         log(results.result);
       });
     }
   }
 
   /* Update what is present in json object */
-  this.updateTask = function(task, callback) {
-    mongo.findById( task._id, function(err, result) {
-      var comma = false;
-      var update = "";
+  this.updateTask = (task, callback) => {
+    mongo.findById( task._id, (err, result) => {
+      let comma = false,
+          update = "";
+      
       if (task.text != null) {
         if (comma) { update += ", "; } else { comma = true; }
-        update += "\"text\": \"" + task.text + "\"";
+        update += `"text": "${task.text}"`;
       }
       if (task.g_context != null) {
         if (task.g_context.width != null) {
